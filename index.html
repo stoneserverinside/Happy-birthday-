@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Sameer! 🎂</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -21,7 +21,7 @@
 
         .container {
             text-align: center;
-            z-index: 10;
+            z-index: 10; /* Buttons ko upar rakhne ke liye */
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
             border-radius: 25px;
@@ -29,27 +29,19 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             width: 85%;
             max-width: 400px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         .profile-pic {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            border: 6px solid #ff4081;
+            border: 5px solid #ff4081;
             margin-bottom: 20px;
             object-fit: cover;
-            box-shadow: 0 0 25px rgba(255, 64, 129, 0.6);
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px rgba(255, 64, 129, 0.5);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        h1 { font-size: 1.8rem; margin-bottom: 20px; color: #00d2ff; text-shadow: 0 0 10px rgba(0,210,255,0.5); }
+        h1 { font-size: 1.8rem; margin-bottom: 20px; color: #00d2ff; }
 
         .btn-menu {
             display: block;
@@ -61,15 +53,40 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
             color: white;
+            position: relative;
+            z-index: 15;
         }
 
         .btn-wish { background: #ff4081; }
         .btn-shayari { background: #4caf50; }
         .btn-music { background: #2196f3; }
 
-        .btn-menu:hover { transform: translateY(-3px); filter: brightness(1.2); }
+        /* --- BALLOONS CSS (FIXED) --- */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            z-index: 1; /* Photo ke piche udenge */
+            animation: floatUp 7s linear forwards;
+        }
+        
+        /* Balloon ki puch/thread */
+        .balloon::after {
+            content: "🎈";
+            position: absolute;
+            bottom: -10px;
+            left: 10px;
+            font-size: 20px;
+            opacity: 0.3;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-130vh) rotate(30deg); opacity: 0; }
+        }
 
         #shayariBox {
             display: none;
@@ -80,25 +97,9 @@
             color: #333;
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            z-index: 30;
-            width: 85%;
-            max-width: 400px;
+            z-index: 100;
+            width: 80%;
             text-align: center;
-        }
-
-        /* Balloon Class */
-        .balloon {
-            position: absolute;
-            bottom: -100px;
-            width: 40px;
-            height: 55px;
-            border-radius: 50%;
-            z-index: 1;
-            animation: floatUp 6s linear forwards;
-        }
-        @keyframes floatUp {
-            to { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
         }
     </style>
 </head>
@@ -119,43 +120,38 @@
 
     <div id="shayariBox">
         <h2 style="color: #3f51b5;">For You Sameer! 🌹</h2>
-        <p>
-            मत मुस्कुराओ इतना की फूलों को खबर लग जाये,🌹🌿🌹<br>
-            हम करें आपकी तारीफ और आपको नजर लग जाये🌹🌿🌹<br>
-            खुदा करे बहुत लम्बी हो आपकी जिंदगी 🦋🤗<br>
-            और उस पर भी हमारी उम्र लग जाये….🌹🌿🌹<br><br>
-            <strong>🍬🎂 हैप्पी बर्थडे SAMEER सदा हँसते रहना…🎂</strong>
-        </p>
+        <p>मत मुस्कुराओ इतना की फूलों को खबर लग जाये...🌹<br>हैप्पी बर्थडे SAMEER!</p>
         <button style="background:#333; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
     </div>
 
     <script>
         function startCelebration() {
-            // Confetti Blast
+            // 1. Confetti Blast
             confetti({
                 particleCount: 150,
                 spread: 70,
-                origin: { y: 0.6 }
+                origin: { y: 0.6 },
+                zIndex: 200
             });
 
-            // Balloons Animation
-            for(let i=0; i<20; i++) {
-                let balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                let colors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#9c27b0'];
-                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-                balloon.style.left = Math.random() * 100 + 'vw';
-                balloon.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(balloon);
-                
-                // Remove balloon after animation
-                setTimeout(() => { balloon.remove(); }, 8000);
+            // 2. Create Balloons (Fixed Function)
+            for(let i=0; i<15; i++) {
+                setTimeout(() => {
+                    let balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    let colors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#e91e63'];
+                    balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    balloon.style.left = (Math.random() * 90) + 'vw';
+                    document.body.appendChild(balloon);
+                    
+                    // Cleanup
+                    setTimeout(() => { balloon.remove(); }, 8000);
+                }, i * 300); // Ek-ek karke udenge
             }
         }
 
         function showShayari() {
             document.getElementById('shayariBox').style.display = 'block';
-            confetti({ particleCount: 50, colors: ['#ff4081', '#00d2ff'] });
         }
 
         let isPlaying = false;
