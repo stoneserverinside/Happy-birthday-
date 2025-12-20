@@ -3,147 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Aman! 🎂</title>
+    <title>Magic Birthday Wish! ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        /* CSS SHURU HOTA HAI */
         body {
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            font-family: 'Poppins', sans-serif;
             overflow: hidden;
+            transition: background 1.5s ease;
         }
 
-        /* Birthday Card Design */
+        /* Glassmorphism Card */
         .card {
-            background: white;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
-            position: relative;
+            color: white;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
             z-index: 10;
-            border: 8px solid #fff;
-            animation: popIn 1s ease-out;
+            animation: fadeIn 2s ease-in;
         }
 
         h1 {
-            color: #d81b60;
             font-size: 3rem;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(to right, #ff4081, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s infinite alternate;
         }
 
-        .name {
-            color: #3f51b5;
+        .name-box {
             font-size: 2.5rem;
-            font-weight: 900;
-            margin: 10px 0;
-            letter-spacing: 2px;
+            color: #00d2ff;
+            font-weight: bold;
+            margin: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        .cake {
-            font-size: 80px;
-            margin: 20px 0;
-            display: block;
-            animation: bounce 2s infinite;
-        }
-
-        .message {
-            color: #666;
-            font-size: 1.2rem;
-            line-height: 1.6;
-        }
-
-        /* Button Styling */
-        .btn {
-            background: linear-gradient(to right, #ff4081, #ec407a);
+        .btn-surprise {
+            background: #ff4081;
             color: white;
-            padding: 15px 35px;
             border: none;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
             margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(236, 64, 122, 0.4);
+            box-shadow: 0 10px 20px rgba(255, 64, 129, 0.4);
+            transition: transform 0.3s;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(236, 64, 122, 0.6);
+        .btn-surprise:hover {
+            transform: scale(1.1);
         }
 
-        /* Balloon Animations */
-        .balloon {
-            position: absolute;
-            bottom: -150px;
-            width: 60px;
-            height: 80px;
-            border-radius: 50%;
-            z-index: 1;
-            animation: floatUp 10s linear infinite;
+        /* Background Stars */
+        .light { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle 2s infinite; }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px #ff4081); }
+            to { filter: drop-shadow(0 0 20px #00d2ff); }
         }
 
-        .balloon::after {
-            content: "▲";
-            position: absolute;
-            bottom: -10px;
-            left: 22px;
-            font-size: 10px;
-            color: inherit;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Keyframes */
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            80% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        @keyframes twinkle { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="balloon" style="left: 10%; background: #ff4081; animation-delay: 0s;"></div>
-    <div class="balloon" style="left: 25%; background: #2196f3; animation-delay: 3s;"></div>
-    <div class="balloon" style="left: 45%; background: #ffeb3b; animation-delay: 1s;"></div>
-    <div class="balloon" style="left: 70%; background: #4caf50; animation-delay: 5s;"></div>
-    <div class="balloon" style="left: 85%; background: #9c27b0; animation-delay: 2s;"></div>
+    <audio id="bdaySong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
-        <h1>Happy Birthday! 🎈</h1>
-        <div class="name">Aman!</div>
-        <div class="cake">🎂</div>
-        <p class="message">
-            Aapka har din khushiyon se bhara ho,<br>
-            Aur aapki har khwaish poori ho! ✨
-        </p>
-        <button class="btn" onclick="celebrate()">Click for Surprise!</button>
+        <h1>HAPPY BIRTHDAY</h1>
+        <div class="name-box">AMAN!</div>
+        <p style="opacity: 0.8;">Click karein aur magic dekhein!</p>
+        <button class="btn-surprise" onclick="startMagic()">MAGIC CLICK 🎵✨</button>
     </div>
 
     <script>
-        function celebrate() {
-            alert('🎉 Janamdin Mubarak Aman! Party kab mil rahi hai? 🥳');
+        // Automatic Stars Generation
+        for (let i = 0; i < 100; i++) {
+            let star = document.createElement('div');
+            star.className = 'light';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(star);
+        }
+
+        function startMagic() {
+            // 1. Play Music
+            var audio = document.getElementById("bdaySong");
+            audio.play().catch(function(error) {
+                console.log("Audio play failed:", error);
+            });
+
+            // 2. Confetti Blast
+            var count = 200;
+            var defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+
+            // 3. Theme Change
+            document.body.style.background = "linear-gradient(to right, #6a11cb, #2575fc)";
+
+            // 4. Message
+            setTimeout(() => {
+                alert("🎁 Music ON ho chuka hai! Happy Birthday Aman! 🥳");
+            }, 600);
         }
     </script>
-
 </body>
 </html>
+
