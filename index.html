@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Sameer! 🎂</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/contetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -86,6 +86,20 @@
             max-width: 400px;
             text-align: center;
         }
+
+        /* Balloon Class */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 55px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: floatUp 6s linear forwards;
+        }
+        @keyframes floatUp {
+            to { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -97,10 +111,8 @@
 
     <div class="container">
         <img src="https://i.ibb.co/h3kmVcr/af40a3bf2f901b3432497787ebfe8747.jpg" alt="Sameer" class="profile-pic">
-        
         <h1>Happy Birthday Sameer! 🎁</h1>
-        
-        <button class="btn-wish btn-menu" onclick="showBalloons()">1. Surprise Wish 🎈</button>
+        <button class="btn-wish btn-menu" onclick="startCelebration()">1. Surprise Wish 🎈</button>
         <button class="btn-shayari btn-menu" onclick="showShayari()">2. Special Shayari ✍️</button>
         <button class="btn-music btn-menu" id="musicBtn" onclick="toggleMusic()">3. Play Music 🎵</button>
     </div>
@@ -114,17 +126,36 @@
             और उस पर भी हमारी उम्र लग जाये….🌹🌿🌹<br><br>
             <strong>🍬🎂 हैप्पी बर्थडे SAMEER सदा हँसते रहना…🎂</strong>
         </p>
-        <button style="background:#333; color:white; border:none; padding:10px 20px; border-radius:20px;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
+        <button style="background:#333; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
     </div>
 
     <script>
-        function showBalloons() {
-            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+        function startCelebration() {
+            // Confetti Blast
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Balloons Animation
+            for(let i=0; i<20; i++) {
+                let balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                let colors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#9c27b0'];
+                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(balloon);
+                
+                // Remove balloon after animation
+                setTimeout(() => { balloon.remove(); }, 8000);
+            }
         }
 
         function showShayari() {
             document.getElementById('shayariBox').style.display = 'block';
-            confetti({ particleCount: 50 });
+            confetti({ particleCount: 50, colors: ['#ff4081', '#00d2ff'] });
         }
 
         let isPlaying = false;
