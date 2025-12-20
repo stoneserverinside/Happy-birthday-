@@ -21,7 +21,7 @@
 
         .container {
             text-align: center;
-            z-index: 10; /* Buttons ko upar rakhne ke liye */
+            z-index: 10;
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
             border-radius: 25px;
@@ -54,7 +54,6 @@
             font-weight: bold;
             cursor: pointer;
             color: white;
-            position: relative;
             z-index: 15;
         }
 
@@ -62,25 +61,14 @@
         .btn-shayari { background: #4caf50; }
         .btn-music { background: #2196f3; }
 
-        /* --- BALLOONS CSS (FIXED) --- */
         .balloon {
             position: absolute;
             bottom: -150px;
             width: 50px;
             height: 70px;
             border-radius: 50%;
-            z-index: 1; /* Photo ke piche udenge */
+            z-index: 1;
             animation: floatUp 7s linear forwards;
-        }
-        
-        /* Balloon ki puch/thread */
-        .balloon::after {
-            content: "🎈";
-            position: absolute;
-            bottom: -10px;
-            left: 10px;
-            font-size: 20px;
-            opacity: 0.3;
         }
 
         @keyframes floatUp {
@@ -98,8 +86,10 @@
             padding: 25px;
             border-radius: 20px;
             z-index: 100;
-            width: 80%;
+            width: 85%;
+            max-width: 450px;
             text-align: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -119,39 +109,39 @@
     </div>
 
     <div id="shayariBox">
-        <h2 style="color: #3f51b5;">For You Sameer! 🌹</h2>
-        <p>मत मुस्कुराओ इतना की फूलों को खबर लग जाये...🌹<br>हैप्पी बर्थडे SAMEER!</p>
+        <h2 style="color: #3f51b5; margin-top: 0;">For You Sameer! 🌹</h2>
+        <p style="font-size: 1rem; line-height: 1.6;">
+            मत मुस्कुराओ इतना की फूलों को खबर लग जाये,🌹🌿🌹<br>
+            हम करें आपकी तारीफ और आपको नजर लग जाये🌹🌿🌹<br>
+            खुदा करे बहुत लम्बी हो आपकी जिंदगी 🦋🤗<br>
+            और उस पर भी हमारी उम्र लग जाये….🌹🌿🌹<br><br>
+            <strong>🍬🎂 हैप्पी बर्थडे SAMEER सदा हँसते रहना…🎂</strong>
+        </p>
         <button style="background:#333; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
     </div>
 
     <script>
         function startCelebration() {
-            // 1. Confetti Blast
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                zIndex: 200
-            });
+            // Confetti
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, zIndex: 200 });
 
-            // 2. Create Balloons (Fixed Function)
+            // Balloons
             for(let i=0; i<15; i++) {
                 setTimeout(() => {
                     let balloon = document.createElement('div');
                     balloon.className = 'balloon';
                     let colors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#e91e63'];
                     balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    balloon.style.left = (Math.random() * 90) + 'vw';
+                    balloon.style.left = (Math.random() * 95) + 'vw';
                     document.body.appendChild(balloon);
-                    
-                    // Cleanup
                     setTimeout(() => { balloon.remove(); }, 8000);
-                }, i * 300); // Ek-ek karke udenge
+                }, i * 300);
             }
         }
 
         function showShayari() {
             document.getElementById('shayariBox').style.display = 'block';
+            confetti({ particleCount: 50, colors: ['#ff4081', '#4caf50'] });
         }
 
         let isPlaying = false;
