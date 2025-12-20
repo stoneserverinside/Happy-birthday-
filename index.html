@@ -3,77 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎈</title>
+    <title>Happy Birthday Aman! 🎂</title>
     <style>
+        /* CSS SHURU HOTA HAI */
         body {
-            background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
             height: 100vh;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
         }
 
-        /* Birthday Card */
+        /* Birthday Card Design */
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             text-align: center;
+            position: relative;
             z-index: 10;
-            border: 5px solid #fff;
+            border: 8px solid #fff;
+            animation: popIn 1s ease-out;
         }
 
-        h1 { color: #ff4081; font-size: 3rem; margin: 0; animation: glow 1s ease-in-out infinite alternate; }
-        .name { color: #3f51b5; font-size: 2.5rem; font-weight: bold; margin: 10px 0; }
-        .cake { font-size: 80px; margin: 20px 0; }
-        
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #ff4081; }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff80ab; }
+        h1 {
+            color: #d81b60;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Balloons Animation */
+        .name {
+            color: #3f51b5;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .cake {
+            font-size: 80px;
+            margin: 20px 0;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        .message {
+            color: #666;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: linear-gradient(to right, #ff4081, #ec407a);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(236, 64, 122, 0.4);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(236, 64, 122, 0.6);
+        }
+
+        /* Balloon Animations */
         .balloon {
             position: absolute;
             bottom: -150px;
-            width: 50px;
-            height: 70px;
-            background: #ff4081;
+            width: 60px;
+            height: 80px;
             border-radius: 50%;
-            animation: float 8s linear infinite;
             z-index: 1;
+            animation: floatUp 10s linear infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        .balloon::after {
+            content: "▲";
+            position: absolute;
+            bottom: -10px;
+            left: 22px;
+            font-size: 10px;
+            color: inherit;
+        }
+
+        /* Keyframes */
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
             100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
         }
 
-        .btn {
-            background: #ff4081; color: white; border: none; padding: 12px 30px;
-            border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
         }
-        .btn:hover { transform: scale(1.1); background: #d81b60; }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
     <div class="balloon" style="left: 10%; background: #ff4081; animation-delay: 0s;"></div>
-    <div class="balloon" style="left: 30%; background: #ffeb3b; animation-delay: 2s;"></div>
-    <div class="balloon" style="left: 55%; background: #4caf50; animation-delay: 4s;"></div>
-    <div class="balloon" style="left: 80%; background: #2196f3; animation-delay: 1s;"></div>
-    <div class="balloon" style="left: 90%; background: #9c27b0; animation-delay: 3s;"></div>
+    <div class="balloon" style="left: 25%; background: #2196f3; animation-delay: 3s;"></div>
+    <div class="balloon" style="left: 45%; background: #ffeb3b; animation-delay: 1s;"></div>
+    <div class="balloon" style="left: 70%; background: #4caf50; animation-delay: 5s;"></div>
+    <div class="balloon" style="left: 85%; background: #9c27b0; animation-delay: 2s;"></div>
 
     <div class="card">
-        <h1>Happy Birthday!</h1>
-        <div class="name">Aman! 🎂</div>
-        <p style="font-size: 1.2rem; color: #555;">Duniya ki saari khushiyan aapko milein!</p>
-        <button class="btn" onclick="alert('🥳 Party toh banti hai!')">Surprise Click!</button>
+        <h1>Happy Birthday! 🎈</h1>
+        <div class="name">Aman!</div>
+        <div class="cake">🎂</div>
+        <p class="message">
+            Aapka har din khushiyon se bhara ho,<br>
+            Aur aapki har khwaish poori ho! ✨
+        </p>
+        <button class="btn" onclick="celebrate()">Click for Surprise!</button>
     </div>
+
+    <script>
+        function celebrate() {
+            alert('🎉 Janamdin Mubarak Aman! Party kab mil rahi hai? 🥳');
+        }
+    </script>
 
 </body>
 </html>
