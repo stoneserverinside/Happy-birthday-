@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman's Special Birthday Menu 🎂</title>
+    <title>Happy Birthday Sameer! 🎂</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -24,18 +24,38 @@
             z-index: 10;
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
-        h1 { font-size: 2.5rem; margin-bottom: 30px; color: #00d2ff; text-shadow: 0 0 10px #00d2ff; }
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 6px solid #ff4081;
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 25px rgba(255, 64, 129, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 { font-size: 1.8rem; margin-bottom: 20px; color: #00d2ff; text-shadow: 0 0 10px rgba(0,210,255,0.5); }
 
         .btn-menu {
             display: block;
-            width: 250px;
-            margin: 15px auto;
-            padding: 15px;
+            width: 100%;
+            margin: 12px 0;
+            padding: 14px;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
@@ -45,13 +65,12 @@
             color: white;
         }
 
-        .btn-wish { background: #ff4081; box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); }
-        .btn-shayari { background: #4caf50; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4); }
-        .btn-music { background: #2196f3; box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4); }
+        .btn-wish { background: #ff4081; box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3); }
+        .btn-shayari { background: #4caf50; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); }
+        .btn-music { background: #2196f3; box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3); }
 
-        .btn-menu:hover { transform: scale(1.05); filter: brightness(1.2); }
+        .btn-menu:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
-        /* Shayari Box Style */
         #shayariBox {
             display: none;
             position: fixed;
@@ -62,57 +81,32 @@
             padding: 25px;
             border-radius: 20px;
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            z-index: 20;
+            z-index: 30;
             width: 85%;
             max-width: 450px;
             text-align: center;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.4s ease-out;
         }
 
-        #shayariBox p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            font-weight: 500;
-            color: #d81b60;
-        }
-
-        .close-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
+        #shayariBox p { font-size: 1rem; line-height: 1.8; color: #d81b60; font-weight: 500; }
 
         @keyframes popIn {
-            from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
             to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
-
-        .balloon {
-            position: absolute;
-            bottom: -100px;
-            width: 40px;
-            height: 55px;
-            border-radius: 50%;
-            animation: floatUp 6s linear infinite;
-        }
-
-        @keyframes floatUp {
-            to { transform: translateY(-110vh) rotate(20deg); }
         }
     </style>
 </head>
 <body>
 
     <audio id="mySong" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="song.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
-        <h1>Aman's Special Day 🎁</h1>
+        <img src="https://i.postimg.cc/mD8Gf3S0/3322cbaf.jpg" alt="Sameer" class="profile-pic">
+        
+        <h1>Happy Birthday Sameer! 🎁</h1>
         
         <button class="btn-wish btn-menu" onclick="showBalloons()">1. Surprise Wish 🎈</button>
         <button class="btn-shayari btn-menu" onclick="showShayari()">2. Special Shayari ✍️</button>
@@ -120,34 +114,30 @@
     </div>
 
     <div id="shayariBox">
-        <h2 style="color: #3f51b5;">For You Aman! 🌹</h2>
+        <h2 style="color: #3f51b5; margin-top: 0;">For You Sameer! 🌹</h2>
         <p>
             मत मुस्कुराओ इतना की फूलों को खबर लग जाये,🌹🌿🌹<br>
             हम करें आपकी तारीफ और आपको नजर लग जाये🌹🌿🌹<br>
             खुदा करे बहुत लम्बी हो आपकी जिंदगी 🦋🤗<br>
             और उस पर भी हमारी उम्र लग जाये….🌹🌿🌹<br><br>
-            <strong>🍬🎂 हैप्पी बर्थडे AMAN सदा हँसती रहना…🎂</strong>
+            <strong>🍬🎂 हैप्पी बर्थडे SAMEER सदा हँसते रहना…🎂</strong>
         </p>
-        <button class="close-btn" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
+        <button style="background:#333; color:white; border:none; padding:10px 25px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
     </div>
 
     <script>
         function showBalloons() {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            for(let i=0; i<20; i++) {
-                let b = document.createElement('div');
-                b.className = 'balloon';
-                b.style.left = Math.random() * 100 + 'vw';
-                b.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
-                b.style.animationDelay = Math.random() * 3 + 's';
-                document.body.appendChild(b);
-            }
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
         }
 
         function showShayari() {
             document.getElementById('shayariBox').style.display = 'block';
-            // Shayari khulne par bhi thoda sa confetti blast
-            confetti({ particleCount: 50, spread: 50, origin: { y: 0.8 } });
+            confetti({ 
+                particleCount: 100, 
+                spread: 60, 
+                origin: { y: 0.7 }, 
+                colors: ['#00d2ff', '#ffffff', '#ff4081'] 
+            });
         }
 
         let isPlaying = false;
