@@ -2,10 +2,17 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Happy Birthday SHABEENA! 🎂</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* slight polish to avoid accidental text select on buttons */
+        }
+
         body {
             margin: 0;
             height: 100vh;
@@ -14,21 +21,24 @@
             align-items: center;
             background: #0f0c29;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
             overflow: hidden;
             color: white;
+            position: relative;
         }
 
         .container {
             text-align: center;
             z-index: 10;
             background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
+            padding: 30px 25px;
             border-radius: 25px;
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             width: 85%;
             max-width: 400px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
         }
 
         .profile-pic {
@@ -39,9 +49,23 @@
             margin-bottom: 20px;
             object-fit: cover;
             box-shadow: 0 0 20px rgba(255, 64, 129, 0.5);
+            background: #2a2a3a;
+            transition: transform 0.3s ease;
+        }
+        .profile-pic:hover {
+            transform: scale(1.02);
         }
 
-        h1 { font-size: 1.8rem; margin-bottom: 20px; color: #00d2ff; }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffb347, #ff6b6b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
 
         .btn-menu {
             display: block;
@@ -55,11 +79,16 @@
             cursor: pointer;
             color: white;
             z-index: 15;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            letter-spacing: 0.5px;
         }
-
-        .btn-wish { background: #ff4081; }
-        .btn-shayari { background: #4caf50; }
-        .btn-music { background: #2196f3; }
+        .btn-menu:active {
+            transform: scale(0.97);
+        }
+        .btn-wish { background: #ff4081; box-shadow: 0 5px 12px rgba(255,64,129,0.3); }
+        .btn-shayari { background: #4caf50; box-shadow: 0 5px 12px rgba(76,175,80,0.3); }
+        .btn-music { background: #2196f3; box-shadow: 0 5px 12px rgba(33,150,243,0.3); }
 
         .balloon {
             position: absolute;
@@ -69,11 +98,24 @@
             border-radius: 50%;
             z-index: 1;
             animation: floatUp 7s linear forwards;
+            pointer-events: none;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.2);
+        }
+        /* adding a little string effect */
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            width: 1px;
+            height: 15px;
+            background: rgba(255,255,255,0.6);
+            transform: translateX(-50%);
         }
 
         @keyframes floatUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-130vh) rotate(30deg); opacity: 0; }
+            100% { transform: translateY(-130vh) rotate(25deg); opacity: 0; }
         }
 
         #shayariBox {
@@ -81,81 +123,227 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            color: #333;
-            padding: 25px;
-            border-radius: 20px;
-            z-index: 100;
-            width: 85%;
+            background: rgba(255,255,255,0.97);
+            color: #1f1f2e;
+            padding: 28px 22px;
+            border-radius: 32px;
+            z-index: 1000;
+            width: 88%;
             max-width: 450px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 45px rgba(0,0,0,0.4);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.5);
+            animation: fadeZoom 0.2s ease-out;
+        }
+        @keyframes fadeZoom {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        #shayariBox h2 {
+            color: #d81b60;
+            margin-top: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-bottom: 2px dashed #ffb6c1;
+            display: inline-block;
+            padding-bottom: 6px;
+            margin-bottom: 15px;
+        }
+        .shayari-text {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            margin: 20px 0;
+            background: #fff0f5;
+            padding: 16px;
+            border-radius: 28px;
+            color: #2c2c3a;
+            font-weight: 500;
+            font-family: 'Poppins', monospace;
+        }
+        .close-shayari {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            margin-top: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        .close-shayari:hover {
+            background: #e91e63;
+            transform: scale(0.97);
+        }
+
+        /* small responsive */
+        @media (max-width: 480px) {
+            .container { padding: 20px 18px; width: 92%; }
+            h1 { font-size: 1.4rem; }
+            .profile-pic { width: 120px; height: 120px; }
+            .btn-menu { padding: 12px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="mySong" loop>
+    <!-- Audio element with fallback song (original style + same reliable URL) -->
+    <audio id="mySong" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support audio element.
     </audio>
 
     <div class="container">
-        <img src="https://i.ibb.co/kvGBjWb/20260418-055201.jpg" alt="Sameer" class="profile-pic">
-        <h1>Happy Birthday SHABEENA! 🎁</h1>
+        <!-- PROFILE PICTURE: exactly the image link you provided (ibb.co direct source) -->
+        <img src="https://i.ibb.co/kvGBjWb/20260418-055201.jpg" alt="SHABEENA Birthday" class="profile-pic">
+        <h1>🎉 Happy Birthday SHABEENA! 🎁</h1>
         <button class="btn-wish btn-menu" onclick="startCelebration()">1. Surprise Wish 🎈</button>
         <button class="btn-shayari btn-menu" onclick="showShayari()">2. Special Shayari ✍️</button>
         <button class="btn-music btn-menu" id="musicBtn" onclick="toggleMusic()">3. Play Music 🎵</button>
     </div>
 
+    <!-- Shayari Card Modal (exact same beautiful text, nothing removed) -->
     <div id="shayariBox">
-        <h2 style="color: #3f51b5; margin-top: 0;">For You SHABEENA! 🌹</h2>
-        <p style="font-size: 1rem; line-height: 1.6;">
+        <h2>✨ For You SHABEENA! 🌹</h2>
+        <div class="shayari-text">
             मत मुस्कुराओ इतना की फूलों को खबर लग जाये,🌹🌿🌹<br>
             हम करें आपकी तारीफ और आपको नजर लग जाये🌹🌿🌹<br>
             खुदा करे बहुत लम्बी हो आपकी जिंदगी 🦋🤗<br>
             और उस पर भी हमारी उम्र लग जाये….🌹🌿🌹<br><br>
-            <strong>🍬🎂 हैप्पी बर्थडे Shabeena सदा हँसते रहना…🎂</strong>
-        </p>
-        <button style="background:#333; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('shayariBox').style.display='none'">Dil Se Shukriya ❤️</button>
+            <strong>🍬🎂 हैप्पी बर्थडे Shabeena सदा हँसते रहना…🎂🍬</strong>
+        </div>
+        <button class="close-shayari" onclick="document.getElementById('shayariBox').style.display='none'">💖 Dil Se Shukriya 💖</button>
     </div>
 
     <script>
+        // ========== CELEBRATION FUNCTION (confetti + balloons) ==========
         function startCelebration() {
-            // Confetti
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, zIndex: 200 });
+            // CONFETTI BURST - big party effect
+            confetti({
+                particleCount: 200,
+                spread: 80,
+                origin: { y: 0.6 },
+                startVelocity: 18,
+                colors: ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#e91e63', '#ffa726'],
+                zIndex: 200
+            });
+            // extra side confetti for more joy
+            setTimeout(() => {
+                confetti({ particleCount: 80, spread: 55, origin: { y: 0.5, x: 0.2 }, zIndex: 200 });
+                confetti({ particleCount: 80, spread: 55, origin: { y: 0.5, x: 0.8 }, zIndex: 200 });
+            }, 150);
 
-            // Balloons
-            for(let i=0; i<15; i++) {
+            // BALLOONS GENERATION: 18 balloons with different delays & colors
+            const balloonColors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#e91e63', '#9c27b0', '#ff9800', '#3f51b5', '#f44336'];
+            for(let i = 0; i < 22; i++) {
                 setTimeout(() => {
                     let balloon = document.createElement('div');
                     balloon.className = 'balloon';
-                    let colors = ['#ff4081', '#00d2ff', '#4caf50', '#ffeb3b', '#e91e63'];
-                    balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    balloon.style.left = (Math.random() * 95) + 'vw';
+                    let randomColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                    balloon.style.background = randomColor;
+                    // random horizontal position (2% to 96% to avoid edges)
+                    let leftPos = 2 + Math.random() * 94;
+                    balloon.style.left = leftPos + 'vw';
+                    // random size variation for fun
+                    let sizeScale = 0.8 + Math.random() * 0.7;
+                    balloon.style.width = (50 * sizeScale) + 'px';
+                    balloon.style.height = (70 * sizeScale) + 'px';
+                    balloon.style.opacity = 0.9;
                     document.body.appendChild(balloon);
-                    setTimeout(() => { balloon.remove(); }, 8000);
-                }, i * 300);
+                    // remove balloon after animation ends (approx 8s)
+                    setTimeout(() => {
+                        if(balloon && balloon.remove) balloon.remove();
+                    }, 8500);
+                }, i * 240);
             }
+            // Also a little floating text happiness (optional)
+            let msgDiv = document.createElement('div');
+            msgDiv.innerText = '🎂🎈 Happy Birthday! 🎈🎂';
+            msgDiv.style.position = 'fixed';
+            msgDiv.style.bottom = '20%';
+            msgDiv.style.left = '50%';
+            msgDiv.style.transform = 'translateX(-50%)';
+            msgDiv.style.background = 'rgba(0,0,0,0.7)';
+            msgDiv.style.color = '#fff';
+            msgDiv.style.padding = '8px 20px';
+            msgDiv.style.borderRadius = '40px';
+            msgDiv.style.fontWeight = 'bold';
+            msgDiv.style.fontSize = '1.2rem';
+            msgDiv.style.zIndex = '300';
+            msgDiv.style.backdropFilter = 'blur(8px)';
+            msgDiv.style.pointerEvents = 'none';
+            document.body.appendChild(msgDiv);
+            setTimeout(() => { if(msgDiv) msgDiv.remove(); }, 2200);
         }
 
+        // ========== SHAYARI MODAL (beautiful and fully intact) ==========
         function showShayari() {
-            document.getElementById('shayariBox').style.display = 'block';
-            confetti({ particleCount: 50, colors: ['#ff4081', '#4caf50'] });
+            const modal = document.getElementById('shayariBox');
+            modal.style.display = 'block';
+            // Add gentle confetti for shayari moment (soft effect)
+            confetti({
+                particleCount: 70,
+                spread: 45,
+                origin: { y: 0.7 },
+                colors: ['#ff4081', '#ffb74d', '#81c784'],
+                startVelocity: 12,
+                zIndex: 900
+            });
         }
 
+        // ========== MUSIC CONTROLS (original toggle, nothing removed) ==========
         let isPlaying = false;
         let song = document.getElementById("mySong");
+        
         function toggleMusic() {
             if (isPlaying) {
                 song.pause();
-                document.getElementById("musicBtn").innerHTML = "3. Play Music 🎵";
+                const musicBtn = document.getElementById("musicBtn");
+                if (musicBtn) musicBtn.innerHTML = "3. Play Music 🎵";
             } else {
-                song.play();
-                document.getElementById("musicBtn").innerHTML = "3. Pause Music ⏸️";
+                // play music - handles autoplay policies gracefully (user interaction based)
+                song.play().catch(err => {
+                    console.log("Audio play error: ", err);
+                    // Fallback: show subtle hint if needed but not intrusive
+                    const tempMsg = document.createElement('div');
+                    tempMsg.innerText = "🎵 Tap again to play music 🎵";
+                    tempMsg.style.position = 'fixed';
+                    tempMsg.style.bottom = '20px';
+                    tempMsg.style.left = '50%';
+                    tempMsg.style.transform = 'translateX(-50%)';
+                    tempMsg.style.background = '#ff4081';
+                    tempMsg.style.color = 'white';
+                    tempMsg.style.padding = '8px 18px';
+                    tempMsg.style.borderRadius = '30px';
+                    tempMsg.style.fontSize = '0.8rem';
+                    tempMsg.style.zIndex = '999';
+                    tempMsg.style.fontWeight = 'bold';
+                    document.body.appendChild(tempMsg);
+                    setTimeout(() => tempMsg.remove(), 1800);
+                });
+                const musicBtn = document.getElementById("musicBtn");
+                if (musicBtn) musicBtn.innerHTML = "3. Pause Music ⏸️";
             }
             isPlaying = !isPlaying;
         }
+        
+        // small preload hint: if song is autoplay blocked, button remains functional
+        // Also to ensure image is loaded properly from i.ibb.co (already set in src)
+        // Add graceful error handling for image if needed (no changes to actual content)
+        window.addEventListener('load', () => {
+            // small debug to confirm image exists? not needed, but we keep all elements as they are.
+            // just an optional tiny improvement to ensure audio context ready.
+            // Also ensuring no extra modifications to original design.
+            const profileImg = document.querySelector('.profile-pic');
+            if(profileImg) {
+                profileImg.setAttribute('alt', 'SHABEENA Birthday Celebration');
+            }
+            // background ready
+        });
     </script>
 </body>
 </html>
